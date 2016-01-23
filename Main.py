@@ -1,30 +1,52 @@
 import random
 import itertools
 
-players = []
+playerList = []
 
 print("Time to play Old Maid! \n\n Menu \n 1. New Game \n 2. Play Again \n 3. How to Play")
 
 menuChoose = input('')
 menuChoose = int(menuChoose)
 
+class Player:
+    cards = []
+
+    def __init__(self, playerID, name, cards):
+        self.id = playerID
+        self.name = name
+        self.cards = cards
+
+    def addCard(self, cards):
+        self.cards.append(cards)
+
+    def getName(self):
+        return self.name
+
+    def getCards(self, cards):
+        return self.cards
+
+
 def CreatePlayers():
-    playerNames = []
+    playerObj = []
     playerCount = 0
 
     for player in range(playerNum):
         if playerCount == 0:
-            playerNames.append('Player')
+            playerObj.append(Player(playerCount,'Player',''))
+            print(Player.getName(playerList[0]))
         else:
-            playerNames.append('Computer ' + str(playerCount))
+            playerObj.append(Player(playerCount,'Computer ' + str(playerCount), ''))
         playerCount = playerCount + 1
 
-    return playerNames
+    # for player in players:
+        # print(player)
+    return playerObj
 
 if menuChoose == 1:
     playerNum = input("How many players? ")
     playerNum = int(playerNum)
-    players = CreatePlayers()
+    playerList = CreatePlayers()
+
 
 def BuildDeck():
     deck = []
@@ -56,16 +78,19 @@ deck = BuildDeck()
 #     self.__init__(playerNum)
 #     self.Players = []
 
-class OldMaid():
+class OldMaid:
     def Start(self):
         p = 0
         for card in range(len(deck)):
-            for player in range(len(players)):
-                drawCard = deck.pop()
-                print(drawCard + " was drawn from deck.")
-                players.append(drawCard)
-                # print(players[p])
-                p = p + 1
+            for player in range(len(playerList)):
+                try:
+                    drawCard = deck.pop()
+                    print(drawCard + " was drawn from deck.")
+                    # print(players[p])
+                    p = p + 1
+                except Exception:
+                    break
+
 
 
 

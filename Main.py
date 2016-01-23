@@ -1,35 +1,30 @@
 import random
 import itertools
 
+players = []
+
 print("Time to play Old Maid! \n\n Menu \n 1. New Game \n 2. Play Again \n 3. How to Play")
 
 menuChoose = input('')
+menuChoose = int(menuChoose)
 
-playerNames = []
-playerNum = input("How many players? ")
-playerCount = 0
+def CreatePlayers():
+    playerNames = []
+    playerCount = 0
 
-for player in range(len(playerNum)):
-    if playerCount == 0:
-        playerNames.append('Player')
-    else:
-        playerNames.append('Computer ' + str(playerCount))
-    playerCount = playerCount + 1
-    print(playerNames)
+    for player in range(playerNum):
+        if playerCount == 0:
+            playerNames.append('Player')
+        else:
+            playerNames.append('Computer ' + str(playerCount))
+        playerCount = playerCount + 1
 
-def OldMaid():
-    nothing = 'nothing'
+    return playerNames
 
-
-    # def __init__(self,PlayerNumber):
-    #     self.__init__(playerNum)
-    #     self.Players = []
-    # def Start(self):
-    #     Deck = Card()
-    #     for playerNum in range(0,self.Players):
-    #         PlayerCard = Card.RandomCard()
-    #         AddPlayer = Player(playerID,RandomCard)
-
+if menuChoose == 1:
+    playerNum = input("How many players? ")
+    playerNum = int(playerNum)
+    players = CreatePlayers()
 
 def BuildDeck():
     deck = []
@@ -51,6 +46,32 @@ def BuildDeck():
         print(card)
     return deck
 
+deck = BuildDeck()
+
+# class OldMaid():
+#     nothing = 'nothing'
+
+
+# def __init__(self,PlayerNumber):
+#     self.__init__(playerNum)
+#     self.Players = []
+
+class OldMaid():
+    def Start(self):
+        p = 0
+        for card in range(len(deck)):
+            for player in range(len(players)):
+                drawCard = deck.pop()
+                print(drawCard + " was drawn from deck.")
+                players.append(drawCard)
+                # print(players[p])
+                p = p + 1
+
+
+
+
+OldMaid().Start()
+
 
 # ANSI escape sequences for terminal output
 # http://stackoverflow.com/questions/287871/print-in-terminal-with-colors-using-python
@@ -62,8 +83,6 @@ class colors:
     RED = '\033[93m'
     WHITE = '\033[0m'
     UNDERLINE = '\033[4m'
-
-BuildDeck()
 
 
 

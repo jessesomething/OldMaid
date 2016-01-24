@@ -22,25 +22,24 @@ class Player:
     def getName(self):
         return self.name
 
-    def getCards(self, cards):
+    def getCards(self):
         return self.cards
 
 
 def CreatePlayers():
-    playerObj = []
+    playerObjList = []
     playerCount = 0
 
     for player in range(playerNum):
         if playerCount == 0:
-            playerObj.append(Player(playerCount,'Player',''))
-            print(Player.getName(playerList[0]))
+            playerObjList.append(Player(playerCount,'Player',''))
         else:
-            playerObj.append(Player(playerCount,'Computer ' + str(playerCount), ''))
+            playerObjList.append(Player(playerCount,'Computer ' + str(playerCount), ''))
         playerCount = playerCount + 1
 
     # for player in players:
         # print(player)
-    return playerObj
+    return playerObjList
 
 if menuChoose == 1:
     playerNum = input("How many players? ")
@@ -85,6 +84,7 @@ class OldMaid:
             for player in range(len(playerList)):
                 try:
                     drawCard = deck.pop()
+                    
                     print(drawCard + " was drawn from deck.")
                     # print(players[p])
                     p = p + 1
@@ -96,6 +96,10 @@ class OldMaid:
 
 
 OldMaid().Start()
+
+for i in range(len(playerList)):
+    print(Player.getName(playerList[i]))
+    print(Player.getCards(playerList[i]))
 
 
 # ANSI escape sequences for terminal output

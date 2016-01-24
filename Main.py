@@ -74,6 +74,27 @@ def BuildDeck():
         print(card)
     return deck
 
+# def BuildDeck():
+#     deck = []
+#     # Shortcut codes for diamonds hearts clubs spades
+#     suits = ['\u2662', '\u2661', '\u2663', '\u2660']
+#     for suit in suits:
+#         for value in range(2,15):
+#             if value == 11:
+#                 value = 'J'
+#             elif value == 12:
+#                 value = 'Q'
+#             elif value == 13:
+#                 value = 'K'
+#             elif value == 14:
+#                 value = 'A'
+#             deck.append(str(value) + " " + suit)
+#     deck.append(15)
+#     random.shuffle(deck)
+#     for card in deck:
+#         print(card)
+#     return deck
+
 def FaceCard(card):
     hand = []
     for value in range(2,15):
@@ -120,14 +141,27 @@ class OldMaid:
         while 1==1:
             for p in range(len(playerList)):
                 if p == 0:
+                    cards = []
+                    values = []
+                    pairs = []
                     for c in range(len(Player.getCards(playerList[p]))):
                         cardList = Player.getCards(playerList[p])
-                        pairs = []
                         # for i in c:
                         #     Player.getCards(playerList[p]))
                         card = cardList[c]
                         cardValue = card.split(' ')
-                        print(cardValue)
+                        cards.append(cardValue)
+
+                    print(cards)
+                    for i in cards:
+                        for value in i:
+                            values.append(value)
+                    print(values)
+                    for v in range(2,10):
+                        if values.count(str(v)) == 2:
+                            print("Found one")
+
+                    values.count(1)
             break
 
 

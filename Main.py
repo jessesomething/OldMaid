@@ -1,5 +1,4 @@
 import random
-import itertools
 
 playerList = []
 
@@ -74,27 +73,6 @@ def BuildDeck():
         print(card)
     return deck
 
-# def BuildDeck():
-#     deck = []
-#     # Shortcut codes for diamonds hearts clubs spades
-#     suits = ['\u2662', '\u2661', '\u2663', '\u2660']
-#     for suit in suits:
-#         for value in range(2,15):
-#             if value == 11:
-#                 value = 'J'
-#             elif value == 12:
-#                 value = 'Q'
-#             elif value == 13:
-#                 value = 'K'
-#             elif value == 14:
-#                 value = 'A'
-#             deck.append(str(value) + " " + suit)
-#     deck.append(15)
-#     random.shuffle(deck)
-#     for card in deck:
-#         print(card)
-#     return deck
-
 def FaceCard(card):
     hand = []
     for value in range(2,15):
@@ -111,16 +89,6 @@ def FaceCard(card):
 
 
 deck = BuildDeck()
-
-tempHand = []
-
-# class OldMaid():
-#     nothing = 'nothing'
-
-
-# def __init__(self,PlayerNumber):
-#     self.__init__(playerNum)
-#     self.Players = []
 
 class OldMaid:
     def Start(self):
@@ -217,13 +185,3 @@ print(Player.getId(playerList[0]))
 #     RED = '\033[93m'
 #     WHITE = '\033[0m'
 #     UNDERLINE = '\033[4m'
-
-
-
-
-# playDeck = BuildDeck()
-# playDeck = random.shuffle(BuildDeck())
-#
-# print(playDeck)
-
-# print(suitColors.DIAMONDS + suitColors.HEARTS + suitColors.CLUBS + suitColors.SPADES)

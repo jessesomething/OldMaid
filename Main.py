@@ -40,7 +40,7 @@ def CreatePlayers():
             playerObjList.append(Player(playerCount,'Computer ' + str(playerCount), ''))
         playerCount = playerCount + 1
 
-    # for player in players:
+        # for player in players:
         # print(player)
     return playerObjList
 
@@ -52,18 +52,19 @@ if menuChoose == 1:
 
 def BuildDeck():
     deck = []
-    suits = ['Diamonds', 'Hearts', 'Clubs', 'Spades']
+    # Shortcut codes for diamonds hearts clubs spades
+    suits = ['\u2662', '\u2661', '\u2663', '\u2660']
     for suit in suits:
         for value in range(2,15):
             if value == 11:
-                value = 'Jack'
+                value = 'J'
             elif value == 12:
-                value = 'Queen'
+                value = 'Q'
             elif value == 13:
-                value = 'King'
+                value = 'K'
             elif value == 14:
-                value = 'Ace'
-            deck.append(str(value) + ' of ' + suit)
+                value = 'A'
+            deck.append(str(value) + suit)
     deck.append('The Old Maid')
     random.shuffle(deck)
     for card in deck:
@@ -103,22 +104,26 @@ class OldMaid:
 
 OldMaid().Start()
 
-for i in range(len(playerList)):
-    print(Player.getName(playerList[i]))
-    print(Player.getCards(playerList[i]))
-    print(Player.getId(playerList[i]))
+
+print(Player.getName(playerList[0]))
+print(Player.getCards(playerList[0]))
+print(Player.getId(playerList[0]))
 
 
 # ANSI escape sequences for terminal output
 # http://stackoverflow.com/questions/287871/print-in-terminal-with-colors-using-python
-class colors:
-    GRAY = '\033[90m'
-    YELLOW = '\033[93M'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    RED = '\033[93m'
-    WHITE = '\033[0m'
-    UNDERLINE = '\033[4m'
+# class suitColors:
+#     DIAMONDS = '\u2662'
+#     HEARTS = '\u2661'
+#     CLUBS = '\u2663'
+#     SPADES = '\u2660'
+#     GRAY = '\033[90m'
+#     YELLOW = '\033[93M'
+#     BLUE = '\033[94m'
+#     GREEN = '\033[92m'
+#     RED = '\033[93m'
+#     WHITE = '\033[0m'
+#     UNDERLINE = '\033[4m'
 
 
 
@@ -128,6 +133,5 @@ class colors:
 #
 # print(playDeck)
 
-print(colors.GRAY + "\u2660 "
-      + colors.RED + "Another test")
+print(suitColors.DIAMONDS + suitColors.HEARTS + suitColors.CLUBS + suitColors.SPADES)
 

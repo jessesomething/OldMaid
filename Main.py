@@ -59,6 +59,14 @@ def BuildDeck():
     suits = ['\u2662', '\u2661', '\u2663', '\u2660']
     for suit in suits:
         for value in range(2,15):
+            if value == 11:
+                value = 'J'
+            elif value == 12:
+                value = 'Q'
+            elif value == 13:
+                value = 'K'
+            elif value == 14:
+                value = 'A'
             deck.append(str(value) + " " + suit)
     deck.append(15)
     random.shuffle(deck)
@@ -88,23 +96,17 @@ def BuildDeck():
 #     return deck
 
 def FaceCard(card):
-    cardValues = []
-    cardStr = card.split(" ")
-    cardValues.append(cardStr[0])
-
-    if cardValues[0] == str(11):
-        cardStr = 'J' + cardValues[1]
-    elif cardValues[0] == str(12):
-        cardStr = 'Q' + cardValues[1]
-    elif cardValues[0] == str(13):
-        cardStr = 'K' + cardValues[1]
-    elif cardValues[0] == str(14):
-        cardStr = 'A' + cardValues[1]
-    elif cardValues[0] == str(15):
-        cardStr = 'The Old Maid'
-    return cardStr
-
-
+    hand = []
+    for value in range(2,15):
+        if value == 11:
+            card = 'J'
+        elif value == 12:
+            card = 'Q'
+        elif value == 13:
+            card = 'K'
+        elif value == 14:
+            card = 'A'
+        return card
 
 
 
@@ -129,7 +131,7 @@ class OldMaid:
                 try:
                     drawCard = deck.pop()
                     Player.addCard(playerList[pl], drawCard)
-                    print(Player.getName(playerList[pl]) + " draws a " + FaceCard(drawCard))
+                    print(Player.getName(playerList[pl]) + " draws a " + drawCard)
                     # print(drawCard + " was drawn from deck.")
                     # print(players[p])
                     p = p + 1
@@ -148,7 +150,7 @@ class OldMaid:
                         #     Player.getCards(playerList[p]))
                         card = cardList[c]
                         cardValue = card.split(' ')
-                        cards.append(cardValue[0])
+                        cards.append(cardValue)
 
                     print(cards)
                     for i in cards:
@@ -225,4 +227,3 @@ print(Player.getId(playerList[0]))
 # print(playDeck)
 
 # print(suitColors.DIAMONDS + suitColors.HEARTS + suitColors.CLUBS + suitColors.SPADES)
-

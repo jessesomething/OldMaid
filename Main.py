@@ -25,6 +25,9 @@ class Player:
     def getCards(self):
         return self.cards
 
+    def getValue(self, value):
+        return self.cards.index(value)
+
     def getId(self):
         return self.id
 
@@ -64,12 +67,27 @@ def BuildDeck():
                 value = 'K'
             elif value == 14:
                 value = 'A'
-            deck.append(str(value) + suit)
-    deck.append('The Old Maid')
+            deck.append(str(value) + " " + suit)
+    deck.append(15)
     random.shuffle(deck)
     for card in deck:
         print(card)
     return deck
+
+def FaceCard(card):
+    hand = []
+    for value in range(2,15):
+        if value == 11:
+            card = 'J'
+        elif value == 12:
+            card = 'Q'
+        elif value == 13:
+            card = 'K'
+        elif value == 14:
+            card = 'A'
+        return card
+
+
 
 deck = BuildDeck()
 
@@ -86,6 +104,7 @@ tempHand = []
 class OldMaid:
     def Start(self):
         p = 0
+        # Deals cards out
         for c in range(len(deck)):
             for pl in range(len(playerList)):
                 try:
@@ -98,6 +117,45 @@ class OldMaid:
                 except Exception:
                     break
 
+        while 1==1:
+            for p in range(len(playerList)):
+                if p == 0:
+                    for c in range(len(Player.getCards(playerList[p]))):
+                        cardList = Player.getCards(playerList[p])
+                        pairs = []
+                        # for i in c:
+                        #     Player.getCards(playerList[p]))
+                        card = cardList[c]
+                        cardValue = card.split(' ')
+                        print(cardValue)
+            break
+
+
+
+        # First move is rolled for
+        # playerRolls = [0,0,0,0]
+        # highRoll = 0
+        # highRoller = 0
+        # winners = []
+        # for p in range(playerNum):
+        #     rollNum = random.randint(1,6)
+        #     playerRolls[p] = rollNum
+        #     if rollNum > highRoll:
+        #         highRoll = rollNum
+        #         highRoller = Player.getName(playerList[p])
+        #     if rollNum == highRoll:
+        #         while 1==1:
+        #
+        #     print(Player.getName(playerList[p]) + " rolled a " + str(rollNum))
+        # # for r in range(len(playerRolls)):
+        # #     if playerRolls[r] > highRoll:
+        # #         highRoll = playerRolls[r]
+        # #         highRoller = playerRolls.index(r)
+        # #     # if playerRolls[r] == highRoll:
+        # print("High roller is " + str(highRoller))
+
+
+
 
 
 
@@ -108,6 +166,7 @@ OldMaid().Start()
 print(Player.getName(playerList[0]))
 print(Player.getCards(playerList[0]))
 print(Player.getId(playerList[0]))
+
 
 
 # ANSI escape sequences for terminal output
@@ -133,5 +192,5 @@ print(Player.getId(playerList[0]))
 #
 # print(playDeck)
 
-print(suitColors.DIAMONDS + suitColors.HEARTS + suitColors.CLUBS + suitColors.SPADES)
+# print(suitColors.DIAMONDS + suitColors.HEARTS + suitColors.CLUBS + suitColors.SPADES)
 

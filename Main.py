@@ -9,21 +9,24 @@ menuChoose = input('')
 menuChoose = int(menuChoose)
 
 class Player:
-    cards = []
+    cardList = []
 
-    def __init__(self, playerID, name, cards):
+    def __init__(self, playerID, name, card):
         self.id = playerID
         self.name = name
-        self.cards = cards
+        self.cards = []
 
-    def addCard(self, cards):
-        self.cards.append(cards)
+    def addCard(self, card):
+        self.cards.append(card)
 
     def getName(self):
         return self.name
 
     def getCards(self):
         return self.cards
+
+    def getId(self):
+        return self.id
 
 
 def CreatePlayers():
@@ -69,6 +72,8 @@ def BuildDeck():
 
 deck = BuildDeck()
 
+tempHand = []
+
 # class OldMaid():
 #     nothing = 'nothing'
 
@@ -80,12 +85,13 @@ deck = BuildDeck()
 class OldMaid:
     def Start(self):
         p = 0
-        for card in range(len(deck)):
-            for player in range(len(playerList)):
+        for c in range(len(deck)):
+            for pl in range(len(playerList)):
                 try:
                     drawCard = deck.pop()
-                    
-                    print(drawCard + " was drawn from deck.")
+                    Player.addCard(playerList[pl], drawCard)
+                    print(Player.getName(playerList[pl]) + " draws a " + drawCard)
+                    # print(drawCard + " was drawn from deck.")
                     # print(players[p])
                     p = p + 1
                 except Exception:
@@ -100,6 +106,7 @@ OldMaid().Start()
 for i in range(len(playerList)):
     print(Player.getName(playerList[i]))
     print(Player.getCards(playerList[i]))
+    print(Player.getId(playerList[i]))
 
 
 # ANSI escape sequences for terminal output

@@ -18,6 +18,12 @@ class Player:
     def addCard(self, card):
         self.cards.append(card)
 
+    def removeCard(self, card):
+        self.cards.pop(card)
+
+    def getCardIndex(self, card):
+        return self.cards.index(card)
+
     def getName(self):
         return self.name
 
@@ -67,7 +73,7 @@ def BuildDeck():
             elif value == 14:
                 value = 'A'
             deck.append(str(value) + " " + suit)
-    deck.append(15)
+    deck.append(str(15) + " OM")
     random.shuffle(deck)
     for card in deck:
         print(card)
@@ -108,53 +114,95 @@ class OldMaid:
 
         while 1==1:
             for p in range(len(playerList)):
-                if p == 0:
-                    cards = []
-                    values = []
-                    pairs = []
-                    for c in range(len(Player.getCards(playerList[p]))):
-                        cardList = Player.getCards(playerList[p])
-                        # for i in c:
-                        #     Player.getCards(playerList[p]))
-                        card = cardList[c]
-                        cardValue = card.split(' ')
-                        cards.append(cardValue)
+                cards = []
+                values = []
+                pairs = []
+                for c in range(len(Player.getCards(playerList[p]))):
+                    cardList = Player.getCards(playerList[p])
+                    # for i in c:
+                    #     Player.getCards(playerList[p]))
+                    card = str(cardList[c])
+                    cardValue = card.split(' ')
+                    cards.append(cardValue)
 
-                    print(cards)
-                    for i in cards:
-                        for value in i:
-                            values.append(value)
-                    print(values)
-                    for v in range(2,10):
-                        if values.count(str(v)) == 2:
-                            print("Found one")
+                print(Player.getName(playerList[p]) + str(cards))
+                for i in cards:
+                    for value in i:
+                        values.append(value)
+                del values[1::2]
+                print(Player.getName(playerList[p]) + str(values))
+                # Checks for pairs and discards them
+                for v in range(len(values)):
+                    numCount = 0
+                    #todo fix
+                    if values.count(str(v)) == 2 and v in range(2,10):
+                        numCount = 0
+                        for m in values:
+                            while numCount < 2:
+                                if m == str(m):
+                                    Player.removeCard(playerList[p], values.index(m))
+                                    numCount = numCount + 1
+                        print(str(Player.getName(playerList[p])) + " discarded a pair of " + str(v) + "'s")
+                if values.count('J') == 2:
+                    jCount = 0
+                    for m in values:
+                        while jCount < 2:
+                            if str(m) == 'J':
+                                Player.removeCard(playerList[p], values.index(m))
+                                jCount = jCount + 1
+                    print(str(Player.getName(playerList[p])) + " discarded a pair of Jacks")
+                if values.count('Q') == 2:
+                    qCount = 0
+                    for m in values:
+                        while qCount < 2:
+                            if str(m) == 'Q':
+                                Player.removeCard(playerList[p], values.index(m))
+                                qCount = qCount + 1
+                    print(str(Player.getName(playerList[p])) + " discarded a pair of Queens")
+                if values.count('K') == 2:
+                    kCount = 0
+                    for m in values:
+                        while kCount < 2:
+                            if str(m) == 'K':
+                                Player.removeCard(playerList[p], values.index(m))
+                                kCount = kCount + 1
 
-                    values.count(1)
+                    print(str(Player.getName(playerList[p])) + " discarded a pair of Kings")
+                if values.count('A') == 2:
+                    aCount = 0
+                    for m in values:
+                        while aCount < 2:
+                            if str(m) == 'A':
+                                Player.removeCard(playerList[p], values.index(m))
+                                aCount = aCount + 1
+
+                    print(str(Player.getName(playerList[p])) + " discarded a pair of Aces")
+                    # values.count(1)
             break
 
 
 
-        # First move is rolled for
-        # playerRolls = [0,0,0,0]
-        # highRoll = 0
-        # highRoller = 0
-        # winners = []
-        # for p in range(playerNum):
-        #     rollNum = random.randint(1,6)
-        #     playerRolls[p] = rollNum
-        #     if rollNum > highRoll:
-        #         highRoll = rollNum
-        #         highRoller = Player.getName(playerList[p])
-        #     if rollNum == highRoll:
-        #         while 1==1:
-        #
-        #     print(Player.getName(playerList[p]) + " rolled a " + str(rollNum))
-        # # for r in range(len(playerRolls)):
-        # #     if playerRolls[r] > highRoll:
-        # #         highRoll = playerRolls[r]
-        # #         highRoller = playerRolls.index(r)
-        # #     # if playerRolls[r] == highRoll:
-        # print("High roller is " + str(highRoller))
+            # First move is rolled for
+            # playerRolls = [0,0,0,0]
+            # highRoll = 0
+            # highRoller = 0
+            # winners = []
+            # for p in range(playerNum):
+            #     rollNum = random.randint(1,6)
+            #     playerRolls[p] = rollNum
+            #     if rollNum > highRoll:
+            #         highRoll = rollNum
+            #         highRoller = Player.getName(playerList[p])
+            #     if rollNum == highRoll:
+            #         while 1==1:
+            #
+            #     print(Player.getName(playerList[p]) + " rolled a " + str(rollNum))
+            # # for r in range(len(playerRolls)):
+            # #     if playerRolls[r] > highRoll:
+            # #         highRoll = playerRolls[r]
+            # #         highRoller = playerRolls.index(r)
+            # #     # if playerRolls[r] == highRoll:
+            # print("High roller is " + str(highRoller))
 
 
 
@@ -165,10 +213,16 @@ class OldMaid:
 OldMaid().Start()
 
 
+
+
 print(Player.getName(playerList[0]))
 print(Player.getCards(playerList[0]))
 print(Player.getId(playerList[0]))
 
+
+print(Player.getName(playerList[1]))
+print(Player.getCards(playerList[1]))
+print(Player.getId(playerList[1]))
 
 
 # ANSI escape sequences for terminal output
